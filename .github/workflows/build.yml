@@ -34,3 +34,4 @@ jobs:
         with:
           files: dist/*
           tag_name: ${{ github.ref }}
+          token: ${{ secrets.GH_TOKEN }}  # Use the secret token for authentication
