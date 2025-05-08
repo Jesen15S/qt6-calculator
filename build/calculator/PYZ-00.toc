@@ -1,4 +1,4 @@
-('C:\\Users\\Admin\\OneDrive\\Desktop\\calculator_project\\build\\calculator\\PYZ-00.pyz',
+('C:\\Users\\Admin\\OneDrive\\Desktop\\calculator_project2\\build\\calculator\\PYZ-00.pyz',
  [('PyQt6',
    'C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\PyQt6\\__init__.py',
    'PYMODULE'),
