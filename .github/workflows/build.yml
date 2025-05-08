@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]  # Removed macOS
 
     steps:
       - name: Checkout Code
@@ -34,4 +34,4 @@ jobs:
         with:
           files: dist/*
           tag_name: ${{ github.ref }}
-          token: ${{ secrets.GH_TOKEN }}  # Use the secret token for authentication
+          token: ${{ secrets.GH_TOKEN }}  # Use authentication token for releases
