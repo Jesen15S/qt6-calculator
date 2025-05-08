@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Executable
         run: |
-          pyinstaller --onefile --windowed --icon=src/icon.ico --add-data "src/calculatorui.ui;src" src/calculator.py
+          pyinstaller --onefile --windowed --icon=src/icon.ico --add-data "src/calculatorui.ui:src" src/calculator.py
 
       - name: Upload to GitHub Releases
         uses: softprops/action-gh-release@v1
