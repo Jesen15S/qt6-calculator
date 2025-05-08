@@ -1,26 +1,37 @@
-name: Parallel Builds
+name: Build & Release Qt6 Calculator
 
 on:
   push:
-    branches: [ main ]
+    tags:
+      - 'v*'  # Runs when version tags are pushed (e.g., v1.0)
 
 jobs:
-  windows:
-    runs-on: windows-latest
-    steps:
-      # [Same build steps as above]
-      - uses: softprops/action-gh-release@v1
-        with:
-          tag_name: windows-${{ github.sha }}
-          release_name: Windows Build (${{ github.sha }})
-          files: dist/*.exe
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]  # Removed macOS
 
-  linux:
-    runs-on: ubuntu-latest
     steps:
-      # [Same build steps as above]
-      - uses: softprops/action-gh-release@v1
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          tag_name: linux-${{ github.sha }}
-          release_name: Linux Build (${{ github.sha }})
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install pyinstaller
+
+      - name: Build Executable
+        run: |
+          pyinstaller --onefile --windowed --icon=src/icon.ico --add-data "src/calculatorui.ui:src" src/calculator.py
+
+      - name: Upload to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        with:
           files: dist/*
+          tag_name: ${{ github.ref }}
+          token: ${{ secrets.GH_TOKEN }}  # Use authentication token for releases
