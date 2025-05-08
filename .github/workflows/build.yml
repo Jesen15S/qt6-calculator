@@ -35,4 +35,3 @@ jobs:
           files: dist/*
           tag_name: ${{ github.ref }}
           token: ${{ secrets.GH_TOKEN }}  # Use authentication token for releases
-          overwrite: true  # Allows replacing existing releases
