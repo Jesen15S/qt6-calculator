@@ -2,20 +2,11 @@ import sys
 import os
 from PyQt6 import QtWidgets, uic
 
-def resource_path(relative):
-    """ Get absolute path to resource """
-    if hasattr(sys, '_MEIPASS'):
-        base_path = sys._MEIPASS
-    else:
-        base_path = os.path.abspath(".")
-    
-    # Handle OS-specific path separators
-    return os.path.join(base_path, *relative.split('/'))
-
 class Calculator(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        ui_path = resource_path("src/calculatorui.ui")
+        # Always find the .ui file relative to this script's location
+        ui_path = os.path.join(os.path.dirname(__file__), "calculatorui.ui")
         uic.loadUi(ui_path, self)
         self.setWindowTitle("Simple Calculator")
 
